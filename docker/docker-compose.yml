@@ -1,0 +1,41 @@
+version: "3.7"
+
+
+services:
+
+  zones:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=!4djp4f0gc4mz)se4x4r*rvr4kzf1u1cf1n!fg5v6wv2w^#%qs
+      - ALLOWED_HOSTS=*
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_PORT=5432
+      - API_BASE_URL=/api/catalog/
+    depends_on:
+      - postgis
+    volumes:
+      - ../:/app
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+
+  postgis:
+    image: postgis/postgis:latest
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    environment:
+      - POSTRGES_USER=user
+      - POSTGRES_PASSWORD=password
+      - PGDATA=/var/lib/postgis/zone_data
+
+volumes:
+  postgres:
+    driver: local
