@@ -14,6 +14,7 @@ class Zone(models.Model):
 class Courier(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=100)
+    zone = models.ForeignKey(Zone, on_delete=models.SET_NULL, blank=True, null=True, related_name='couriers')
 
     def __str__(self):
         return self.name
