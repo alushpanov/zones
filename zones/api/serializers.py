@@ -1,5 +1,3 @@
-import logging
-
 from collections import OrderedDict
 
 from django.contrib.gis.geos import Polygon, Point
@@ -8,8 +6,6 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from zones.models import Courier, Zone
-
-logger = logging.getLogger(__name__)
 
 
 class ZoneSerializer(serializers.Serializer):
