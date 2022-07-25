@@ -1,0 +1,14 @@
+[flake8]
+ignore = E731, E123, S311, C416, DJ01
+exclude =
+    .git,
+    __pycache__,
+    venv,
+    *migrations*,
+    manage.py,
+    __init__.py,
+
+max-line-length = 120
+show-source = false
+enable-extensions=G
+application-import-names = mxlgst-litera

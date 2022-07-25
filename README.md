@@ -4,3 +4,6 @@
 #### 2) docker-compose -f docker/docker-compose.yml up --build
 
 Сваггер находится по адресу: 0.0.0.0:8000/api/schema/swagger-ui/
+
+Для проверки кода на соответствие стандартам pep8, можно запустить из 
+контейнера команду: flake8
