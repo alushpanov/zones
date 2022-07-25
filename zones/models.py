@@ -5,10 +5,10 @@ from django.contrib.gis.db import models
 
 class Zone(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    area = models.PolygonField()
+    coordinates = models.PolygonField()
 
     def __str__(self):
-        return f'{id}'
+        return f'{self.id}'
 
 
 class Courier(models.Model):

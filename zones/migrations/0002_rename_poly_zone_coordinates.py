@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.RenameField(
             model_name='zone',
             old_name='poly',
-            new_name='area',
+            new_name='coordinates',
         ),
     ]

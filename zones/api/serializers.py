@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class ZoneSerializer(serializers.Serializer):
 
     id = serializers.UUIDField(read_only=True)
-    area = CoordinatesField()
+    coordinates = CoordinatesField()
 
     def create(self, validated_data):
-        return Zone.objects.create(area=validated_data['area'])
+        return Zone.objects.create(coordinates=validated_data['coordinates'])

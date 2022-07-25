@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('zones', '0002_rename_poly_zone_area'),
+        ('zones', '0002_rename_poly_zone_coordinates'),
     ]
 
     operations = [
