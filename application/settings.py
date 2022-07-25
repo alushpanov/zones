@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_gis',
+    'drf_spectacular',
     'django.contrib.gis',
     'zones',
 ]
@@ -76,15 +76,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'application.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -94,7 +85,7 @@ DATABASES = {
         # 'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         # 'PORT': os.getenv('POSTGRES_PORT'),
         'NAME': 'postgres',
-        'HOST': 'postgis',
+        'HOST': 'docker_postgis_1',
         'USER': 'postgres',
         'PASSWORD': 'password',
         'PORT': '5432',
@@ -142,3 +133,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Zone API',
+    'DESCRIPTION': 'Zone service',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
