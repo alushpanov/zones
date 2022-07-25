@@ -23,7 +23,6 @@ services:
       - postgis
     volumes:
       - ../:/app
-    command: bash -c "python manage.py runserver 0.0.0.0:8000"
 
   postgis:
     image: postgis/postgis:latest
