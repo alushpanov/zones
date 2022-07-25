@@ -11,10 +11,10 @@ services:
       - "8000:8000"
     environment:
       - DEBUG=1
-      - SECRET_KEY=!4djp4f0gc4mz)se4x4r*rvr4kzf1u1cf1n!fg5v6wv2w^#%qs
+      - SECRET_KEY=django-insecure-zpjq_j_wn+vpuy)te2nz8t)@!e(gxq2@*(-4+ng(4!j$$5vm#j#
       - ALLOWED_HOSTS=*
       - POSTGRES_DB=postgres
-      - POSTGRES_HOST=postgres
+      - POSTGRES_HOST=postgis
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
       - POSTGRES_PORT=5432
