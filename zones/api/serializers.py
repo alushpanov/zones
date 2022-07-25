@@ -2,12 +2,12 @@ import logging
 
 from collections import OrderedDict
 
-from django.contrib.gis.geos import Polygon
+from django.contrib.gis.geos import Polygon, Point
 
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from zones.models import Zone
+from zones.models import Courier, Zone
 
 logger = logging.getLogger(__name__)
 
@@ -41,3 +41,36 @@ class ZoneSerializer(serializers.Serializer):
         return Zone.objects.create(
             coordinates=Polygon(validated_data['coordinates'])
         )
+
+
+class CourierSerializer(serializers.ModelSerializer):
+
+    zone = serializers.PrimaryKeyRelatedField(read_only=True)
+    geo_position = serializers.ListField(
+        child=serializers.FloatField(),
+        min_length=2,
+        max_length=2,
+        write_only=True,
+        required=False,
+    )
+
+    class Meta:
+        model = Courier
+        fields = '__all__'
+
+    @staticmethod
+    def _process_geo_position(validated_data):
+        courier_pos = validated_data.pop('geo_position', None)
+        if courier_pos:
+            courier_zone = Zone.objects.filter(
+                coordinates__contains=Point(courier_pos)
+            ).first()
+            validated_data['zone'] = courier_zone
+
+    def update(self, instance, validated_data):
+        self._process_geo_position(validated_data)
+        return super().update(instance, validated_data)
+
+    def create(self, validated_data):
+        self._process_geo_position(validated_data)
+        return super().create(validated_data)
